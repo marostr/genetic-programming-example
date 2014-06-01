@@ -1,7 +1,5 @@
-GENE_SIZE = 200
-#MUTATION_RATE = 0.001
+GENE_SIZE = 300
 MUTATION_RATE = 0.01
-WORD = 'trudne'
 
 class Chromosome
 
@@ -18,12 +16,7 @@ class Chromosome
     fitness = 0
     WORD.length.times do |i|
       break if w2[i].nil?
-      dist = -(w1[i].ord - w2[i].ord).abs
-      if dist == 0
-        fitness += 0
-      else
-        fitness += -(w1[i].ord - w2[i].ord).abs
-      end
+      fitness += -(w1[i].ord - w2[i].ord).abs
     end
     fitness += -10*(w1.size - w2.size).abs
 	end
