@@ -2,7 +2,7 @@ require_relative 'chromosome'
 require_relative 'population'
 require 'colorize'
 
-NUM_GENERATIONS = 10000
+NUM_GENERATIONS = 20000
 CROSSOVER_RATE = 0.7
 
 population = Population.new
@@ -14,7 +14,7 @@ first_max_fitness = population.max_fitness
  
   offspring = Population.new
   
-  while offspring.count <= population.count-2
+  while offspring.count <= population.count-12
     offspring.chromosomes.uniq!{|ch| ch.genes}
     offspring.chromosomes.delete ""
 
@@ -44,15 +44,21 @@ first_max_fitness = population.max_fitness
   max_color = population_max_fitness < first_max_fitness ? :red : :green
 
   system 'clear'
-  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} \nBest word: #{population.best_word}"
+  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} \n"
+  population.chromosomes.take(10).each_with_index do |ch, i|
+    puts "Best word #{i+1}: #{ch.to_colored_word}"
+    puts "Code: #{ch.to_s}\n"
+  end
   f = File.open("syf/population_#{generation}.txt", 'w+')
   f << population.inspect
 
-  #offspring.chromosomes << population.best_chromosome
+  offspring.chromosomes
+  population.best_chromosomes(10).each{|ch| offspring.chromosomes << ch }
   
 
   population = offspring
   population.sort
+  break if population.best_word == WORD
 end
  
 #puts "Final population: " + population.inspect

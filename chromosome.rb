@@ -1,4 +1,4 @@
-GENE_SIZE = 128
+GENE_SIZE = 200
 #MUTATION_RATE = 0.001
 MUTATION_RATE = 0.01
 WORD = 'trudne'
@@ -20,12 +20,12 @@ class Chromosome
       break if w2[i].nil?
       dist = -(w1[i].ord - w2[i].ord).abs
       #if dist == 0
-        #fitness += 80
+      #  fitness += 0
       #else
       fitness += -(w1[i].ord - w2[i].ord).abs
       #end
     end
-    fitness += -10*(w1.size - w2.size).abs
+    fitness += -8*(w1.size - w2.size).abs
 	end
 
   def to_colored_word
@@ -85,6 +85,6 @@ class Chromosome
 	end
 
 	def to_s
-		genes
+		genes.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l')
 	end
 end

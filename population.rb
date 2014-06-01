@@ -32,6 +32,10 @@ class Population
     chromosomes.first
   end
 
+  def best_chromosomes num
+    chromosomes.take num
+  end
+
   def sort
     self.chromosomes = self.chromosomes.sort_by{|ch| ch.fitness}.reverse
   end
