@@ -1,4 +1,4 @@
-POPULATION_SIZE = 50
+POPULATION_SIZE = 100
 
 class Population
   

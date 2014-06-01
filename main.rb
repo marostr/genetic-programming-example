@@ -48,10 +48,10 @@ first_max_fitness = population.max_fitness
   # TERMINAL OUTPUT
   system 'clear'
   puts "TARGET: #{WORD.colorize(:green)}"
-  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} \n"
+  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)}\n\n"
   population.chromosomes.take(10).each_with_index do |ch, i|
     puts "Best word #{i+1}: #{ch.to_colored_word}"
-    puts "Code: #{ch.to_s}\n"
+    puts "Code: #{ch.to_s}\n\n"
   end
 
   # FILE OUTPUT
