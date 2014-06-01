@@ -7,4 +7,4 @@ Code can include 3 commands: l - left, p - right, w - print.
 It iterates through the alphabet and prints proper letters.
 
 To run: ruby main.rb
-Requirements: colorize gem (gem install colorize)
+Requirements: colorize gem (gem install colorize) and 'populations' directory
