@@ -1,4 +1,4 @@
-POPULATION_SIZE = 24
+POPULATION_SIZE = 50
 
 class Population
   
@@ -9,7 +9,7 @@ class Population
   end
 
   def seed!
-    POPULATION_SIZE.times { chromosomes << Chromosome.new }
+    POPULATION_SIZE.times { chromosomes << Chromosome.new}
   end
 
   def fitness
@@ -24,6 +24,14 @@ class Population
     fitness.max
   end
 
+  def best_word
+    word = sort.first.to_colored_word 
+  end
+
+  def sort
+    chromosomes.sort_by{|ch| ch.fitness}.reverse
+  end
+
   def average_fitness
     total_fitness.to_f / chromosomes.length
   end
@@ -32,19 +40,21 @@ class Population
     chromosomes.count
   end
 
+  def take! num
+    self.chromosomes = self.chromosomes.sort_by{|ch| ch.fitness}.reverse.take num
+  end
+
   def inspect
     ch = []
-    chromosomes.each { |chromosome| ch << chromosome.to_s.gsub('0', 'l').gsub('1', 'p').gsub('2', 'w') }
+    self.sort.each { |chromosome| ch << chromosome.to_s.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l') << "Word: #{chromosome.to_word}" << "Fitness: #{chromosome.fitness}\n"}
     ch.join("\n")
   end
 
   def select
-    rand_selection = rand(total_fitness)
- 
-    total = 0
-    chromosomes.each_with_index do |chromosome, index|
-      total += chromosome.fitness
-      return chromosome if total > rand_selection || index == chromosomes.count - 1
+    if rand < 0.7
+      sort.take(15).sample 
+    else
+      sort.drop(35).sample
     end
   end
 end
