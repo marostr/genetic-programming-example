@@ -13,7 +13,7 @@ class Population
   end
 
   def fitness
-    chromosomes.collect &:fitness
+    chromosomes.map &:fitness
   end
 
   def total_fitness
@@ -40,10 +40,6 @@ class Population
     chromosomes.first.to_word
   end
 
-  def best_chromosome
-    chromosomes.first
-  end
-
   def best_chromosomes num
     chromosomes.take num
   end
@@ -54,10 +50,6 @@ class Population
 
   def count
     chromosomes.count
-  end
-
-  def best_colored_word
-    chromosomes.first.to_colored_word 
   end
 
   def inspect
@@ -74,6 +66,4 @@ class Population
     chromosomes.each { |chromosome| ch << chromosome.to_s.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l') << "Word: #{chromosome.to_word}" << "Fitness: #{chromosome.fitness}\n"}
     ch.join("\n")
   end
-
-
 end
