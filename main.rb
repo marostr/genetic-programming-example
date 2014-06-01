@@ -16,6 +16,7 @@ first_max_fitness = population.max_fitness
   
   while offspring.count <= population.count-2
     offspring.chromosomes.uniq!{|ch| ch.genes}
+    offspring.chromosomes.delete ""
 
     parent1 = population.select
     parent2 = population.select
@@ -43,13 +44,15 @@ first_max_fitness = population.max_fitness
   max_color = population_max_fitness < first_max_fitness ? :red : :green
 
   system 'clear'
-  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} - Best word: #{population.best_word}"
+  puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} \nBest word: #{population.best_word}"
   f = File.open("syf/population_#{generation}.txt", 'w+')
   f << population.inspect
 
   #offspring.chromosomes << population.best_chromosome
   
+
   population = offspring
+  population.sort
 end
  
 #puts "Final population: " + population.inspect

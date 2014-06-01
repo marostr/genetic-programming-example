@@ -25,15 +25,15 @@ class Population
   end
 
   def best_word
-    sort.first.to_colored_word 
+    chromosomes.first.to_colored_word 
   end
 
   def best_chromosome
-    sort.first
+    chromosomes.first
   end
 
   def sort
-    chromosomes.sort_by{|ch| ch.fitness}.reverse
+    self.chromosomes = self.chromosomes.sort_by{|ch| ch.fitness}.reverse
   end
 
   def average_fitness
@@ -44,10 +44,6 @@ class Population
     chromosomes.count
   end
 
-  def take! num
-    self.chromosomes = self.chromosomes.sort_by{|ch| ch.fitness}.reverse.take num
-  end
-
   def inspect
     ch = []
     self.sort.each { |chromosome| ch << chromosome.to_s.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l') << "Word: #{chromosome.to_word}" << "Fitness: #{chromosome.fitness}\n"}
@@ -56,9 +52,9 @@ class Population
 
   def select
     if rand < 0.7
-      sort.take(self.count/3).sample 
+      chromosomes.take(self.count/3).sample 
     else
-      sort.drop(self.count/3).sample
+      chromosomes.drop(self.count/3).sample
     end
   end
 end
