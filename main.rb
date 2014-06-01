@@ -13,7 +13,7 @@ first_fitness = population.average_fitness
 first_max_fitness = population.max_fitness
  
 1.upto(NUM_GENERATIONS).each do |generation|
- 
+
   offspring = Population.new
   
   while offspring.count <= population.count-12
@@ -47,6 +47,7 @@ first_max_fitness = population.max_fitness
 
   # TERMINAL OUTPUT
   system 'clear'
+  puts "TARGET: #{WORD.colorize(:green)}"
   puts "Generation #{generation} - Average: #{population_fitness.round(2).to_s.colorize(average_color)} - Max: #{population_max_fitness.to_s.colorize(max_color)} \n"
   population.chromosomes.take(10).each_with_index do |ch, i|
     puts "Best word #{i+1}: #{ch.to_colored_word}"
@@ -60,12 +61,11 @@ first_max_fitness = population.max_fitness
   offspring.chromosomes
   population.best_chromosomes(10).each{|ch| offspring.chromosomes << ch }
   
-
   population = offspring
   population.sort!
+
   if population.best_word == WORD
-    puts "Final population: " + population.inspect
+    puts "\nFinal population:\n" + population.inspect
     break
   end
 end
- 

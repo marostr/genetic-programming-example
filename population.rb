@@ -63,7 +63,8 @@ class Population
   def inspect
     ch = []
     self.sort!
-    chromosomes.take(3).each { |chromosome| ch << "Code: #{chromosome.to_s}" << "Word: #{chromosome.to_colored_word}" << "Fitness: #{chromosome.fitness}\n"}
+    ch << "TOP THREE"
+    chromosomes.take(3).each { |chromosome| ch << "Code: #{chromosome.to_s}" << "Word: #{chromosome.to_colored_word}" << "Fitness: #{chromosome.fitness}" << "Length: #{chromosome.to_s.length}\n"}
     ch.join("\n")
   end
 
