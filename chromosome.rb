@@ -19,13 +19,13 @@ class Chromosome
     WORD.length.times do |i|
       break if w2[i].nil?
       dist = -(w1[i].ord - w2[i].ord).abs
-      #if dist == 0
-      #  fitness += 0
-      #else
-      fitness += -(w1[i].ord - w2[i].ord).abs
-      #end
+      if dist == 0
+        fitness += 0
+      else
+        fitness += -(w1[i].ord - w2[i].ord).abs
+      end
     end
-    fitness += -8*(w1.size - w2.size).abs
+    fitness += -10*(w1.size - w2.size).abs
 	end
 
   def to_colored_word
@@ -64,16 +64,13 @@ class Chromosome
   end
 
 	def mutate!
-		mutated = []
-		genes.split('').each do |gene|
+		genes.split('').each do 
 			if rand < MUTATION_RATE
-        gene = gene.to_i
-				gene += 1
-				gene %= 3
+        gene = rand 3
+        pos = rand genes.size
+        genes.insert pos, gene.to_s
 			end
-      mutated << gene
 		end
-		self.genes = mutated.join
 	end
 			
 	def & other

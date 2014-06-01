@@ -58,7 +58,7 @@ first_max_fitness = population.max_fitness
 
   population = offspring
   population.sort
-  break if population.best_word == WORD
+  break if population.best_word == 'trudne'
 end
  
 #puts "Final population: " + population.inspect
