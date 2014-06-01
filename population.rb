@@ -25,7 +25,11 @@ class Population
   end
 
   def best_word
-    word = sort.first.to_colored_word 
+    sort.first.to_colored_word 
+  end
+
+  def best_chromosome
+    sort.first
   end
 
   def sort
@@ -52,9 +56,9 @@ class Population
 
   def select
     if rand < 0.7
-      sort.take(15).sample 
+      sort.take(self.count/3).sample 
     else
-      sort.drop(35).sample
+      sort.drop(self.count/3).sample
     end
   end
 end

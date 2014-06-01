@@ -1,6 +1,6 @@
 GENE_SIZE = 128
-MUTATION_RATE = 0.001
-#MUTATION_RATE = 0.01
+#MUTATION_RATE = 0.001
+MUTATION_RATE = 0.01
 WORD = 'dupa'
 
 class Chromosome
@@ -20,12 +20,12 @@ class Chromosome
       break if w2[i].nil?
       dist = -(w1[i].ord - w2[i].ord).abs
       if dist == 0
-        fitness += 100
+        fitness += 80
       else
         fitness += -(w1[i].ord - w2[i].ord).abs
       end
     end
-    fitness += -5 * (w1.size - w2.size).abs
+    fitness += -(w1.size - w2.size).abs
 	end
 
   def to_colored_word
