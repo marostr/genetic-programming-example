@@ -3,14 +3,14 @@ MUTATION_RATE = 0.01
 
 class Chromosome
 
-	attr_accessor :genes
+  attr_accessor :genes
 
-	def initialize genes = nil
+  def initialize genes = nil
     size = rand GENE_SIZE + 4
-		genes ? self.genes = genes : self.genes = (1..size).map{ rand 3 }.join
-	end
+    genes ? self.genes = genes : self.genes = (1..size).map{ rand 3 }.join
+  end
 
-	def fitness
+  def fitness
     w1 = WORD.split('')
     w2 = to_word.split('')
     fitness = 0
@@ -19,7 +19,7 @@ class Chromosome
       fitness += -(w1[i].ord - w2[i].ord).abs
     end
     fitness += -10*(w1.size - w2.size).abs
-	end
+  end
 
   def to_colored_word
     word = self.to_word
@@ -53,28 +53,28 @@ class Chromosome
         word << char[pos]
       end
     end
-    word.join 
+    word.join
   end
 
-	def mutate!
-		genes.split('').each do 
-			if rand < MUTATION_RATE
+  def mutate!
+    genes.split('').each do
+      if rand < MUTATION_RATE
         gene = rand 3
         pos = rand genes.size
         genes.insert pos, gene.to_s
-			end
-		end
-	end
-			
-	def & other
-    length = genes.length < other.genes.length ? genes.length - 1 : other.genes.length - 1
-		split = rand(length)
-		child1 = genes[0, split] + other.genes[split, other.genes.length]
-		child2 = other.genes[0, split] + genes[split, genes.length]
-		[Chromosome.new(child1), Chromosome.new(child2)]
-	end
+      end
+    end
+  end
 
-	def to_s
-		genes.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l')
-	end
+  def & other
+    length = genes.length < other.genes.length ? genes.length - 1 : other.genes.length - 1
+    split = rand(length)
+    child1 = genes[0, split] + other.genes[split, other.genes.length]
+    child2 = other.genes[0, split] + genes[split, genes.length]
+    [Chromosome.new(child1), Chromosome.new(child2)]
+  end
+
+  def to_s
+    genes.gsub('0', 'w').gsub('1', 'p').gsub('2', 'l')
+  end
 end
